@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Gym Store</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<h1>🏋️‍♂️ Gym Store</h1>
+<p class="subtitle">Premium fitness equipment for champions 💪</p>
+
+<button class="cart-btn" onclick="toggleCart()">🛒</button>
+
+<div class="products">
+
+    <div class="card">
+        <img src="Adjustable Dumbbells Set.jpg">
+        <h3>Adjustable Dumbbells Set</h3>
+        <p class="price">150 TND</p>
+        <button onclick="addToCart('Dumbbells',150)">➕ Add to Cart</button>
+    </div>
+
+    <div class="card">
+        <img src="Barbell.jpg">
+        <h3>Standard Barbell</h3>
+        <p class="price">180 TND</p>
+        <button onclick="addToCart('Barbell',180)">➕ Add to Cart</button>
+    </div>
+
+    <div class="card">
+        <img src="Olympic Barbell Kit.jpg">
+        <h3>Olympic Barbell Kit</h3>
+        <p class="price">320 TND</p>
+        <button onclick="addToCart('Olympic Barbell',320)">➕ Add to Cart</button>
+    </div>
+
+    <div class="card">
+        <img src="Cast Iron Kettlebell.jpg">
+        <h3>Cast Iron Kettlebell</h3>
+        <p class="price">90 TND</p>
+        <button onclick="addToCart('Kettlebell',90)">➕ Add to Cart</button>
+    </div>
+
+    <div class="card">
+        <img src="Dumbbells.jpg">
+        <h3>Heavy Dumbbells</h3>
+        <p class="price">140 TND</p>
+        <button onclick="addToCart('Dumbbells Heavy',140)">➕ Add to Cart</button>
+    </div>
+
+    <div class="card">
+        <img src="Home Fitness Treadmill.jpg">
+        <h3>Home Fitness Treadmill</h3>
+        <p class="price">1200 TND</p>
+        <button onclick="addToCart('Treadmill',1200)">➕ Add to Cart</button>
+    </div>
+
+    <div class="card">
+        <img src="power-rack.jpg">
+        <h3>Elite Power Rack System</h3>
+        <p class="price">1800 TND</p>
+        <button onclick="addToCart('Power Rack',1800)">➕ Add to Cart</button>
+    </div>
+    <div class="card">
+        <img src="2 dumbbel 1.5k.jpg">
+        <h3>2 dumbbel 1.5k</h3>
+        <p class="price">29 TND</p>
+        <button onclick="addToCart('Power Rack',1800)">➕ Add to Cart</button>
+    </div>
+
+</div>
+
+<!-- CART -->
+<div id="cartSidebar" class="cart-sidebar">
+    <h2>🛒 Cart</h2>
+    <ul id="cart"></ul>
+    <p>Total: <span id="total">0</span> TND</p>
+</div>
+
+<div id="notif" class="notif"></div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
