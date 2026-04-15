@@ -2,18 +2,32 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gym Store</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<h1>🏋️‍♂️ Gym Store</h1>
-<p class="subtitle">Premium fitness equipment for champions 💪</p>
+<header class="hero">
+    <div class="hero-content">
+        <p class="eyebrow">Elite Fitness Marketplace</p>
+        <h1>🏋️‍♂️ Gym Store</h1>
+        <p class="subtitle">Premium fitness equipment for champions 💪</p>
+    </div>
+</header>
 
-<button class="cart-btn" onclick="toggleCart()">🛒</button>
+<!-- Improved cart trigger with item badge -->
+<button class="cart-btn" onclick="toggleCart()" aria-label="Open cart" aria-expanded="false" aria-controls="cartSidebar">
+    <span class="cart-icon">🛒</span>
+    <span id="cartCount" class="cart-count">0</span>
+</button>
 
-<div class="products">
+<main class="layout">
+<section class="products">
 
     <div class="card">
         <img src="Adjustable Dumbbells Set.jpg">
@@ -67,19 +81,33 @@
         <img src="2 dumbbel 1.5k.jpg">
         <h3>2 dumbbel 1.5k</h3>
         <p class="price">29 TND</p>
-        <button onclick="addToCart('Power Rack',1800)">➕ Add to Cart</button>
+        <button onclick="addToCart('2 dumbbel 1.5k',29)">➕ Add to Cart</button>
     </div>
 
-</div>
+</section>
+</main>
 
 <!-- CART -->
-<div id="cartSidebar" class="cart-sidebar">
-    <h2>🛒 Cart</h2>
+<div id="cartSidebar" class="cart-sidebar" aria-hidden="true">
+    <div class="cart-header">
+        <h2>🛒 Cart</h2>
+        <button class="close-btn" onclick="toggleCart()" aria-label="Close cart">✕</button>
+    </div>
+    <p class="cart-subtitle">Review your selected equipment before checkout.</p>
     <ul id="cart"></ul>
-    <p>Total: <span id="total">0</span> TND</p>
+    <p id="emptyCartState" class="empty-cart-state">Your cart is empty. Add products to get started.</p>
+    <div class="cart-footer">
+        <div class="totals">
+            <p class="items-total">Items: <span id="itemsTotal">0</span></p>
+            <p>Total: <span id="total">0</span> TND</p>
+        </div>
+        <!-- Existing JS feature is preserved and now accessible from UI -->
+        <button class="order-btn" onclick="sendOrder()">Place Order</button>
+    </div>
 </div>
 
 <div id="notif" class="notif"></div>
+<div id="backdrop" class="backdrop" onclick="toggleCart()"></div>
 
 <script src="script.js"></script>
 
