@@ -27,57 +27,76 @@
 </button>
 
 <main class="layout">
+<section class="shop-controls" aria-label="Product controls">
+    <div class="search-wrap">
+        <input id="searchInput" type="search" placeholder="Search equipment..." aria-label="Search products">
+    </div>
+    <div class="filters-wrap">
+        <select id="categoryFilter" aria-label="Filter by category">
+            <option value="all">All Categories</option>
+            <option value="strength">Strength</option>
+            <option value="cardio">Cardio</option>
+            <option value="weights">Weights</option>
+        </select>
+        <select id="priceFilter" aria-label="Filter by price">
+            <option value="all">All Prices</option>
+            <option value="100">Up to 100 TND</option>
+            <option value="300">Up to 300 TND</option>
+            <option value="1000">Up to 1000 TND</option>
+        </select>
+    </div>
+</section>
 <section class="products">
 
-    <div class="card">
+    <div class="card" data-name="Adjustable Dumbbells Set" data-category="weights" data-price="150">
         <img src="Adjustable Dumbbells Set.jpg">
         <h3>Adjustable Dumbbells Set</h3>
         <p class="price">150 TND</p>
         <button onclick="addToCart('Dumbbells',150)">➕ Add to Cart</button>
     </div>
 
-    <div class="card">
+    <div class="card" data-name="Standard Barbell" data-category="strength" data-price="180">
         <img src="Barbell.jpg">
         <h3>Standard Barbell</h3>
         <p class="price">180 TND</p>
         <button onclick="addToCart('Barbell',180)">➕ Add to Cart</button>
     </div>
 
-    <div class="card">
+    <div class="card" data-name="Olympic Barbell Kit" data-category="strength" data-price="320">
         <img src="Olympic Barbell Kit.jpg">
         <h3>Olympic Barbell Kit</h3>
         <p class="price">320 TND</p>
         <button onclick="addToCart('Olympic Barbell',320)">➕ Add to Cart</button>
     </div>
 
-    <div class="card">
+    <div class="card" data-name="Cast Iron Kettlebell" data-category="weights" data-price="90">
         <img src="Cast Iron Kettlebell.jpg">
         <h3>Cast Iron Kettlebell</h3>
         <p class="price">90 TND</p>
         <button onclick="addToCart('Kettlebell',90)">➕ Add to Cart</button>
     </div>
 
-    <div class="card">
+    <div class="card" data-name="Heavy Dumbbells" data-category="weights" data-price="140">
         <img src="Dumbbells.jpg">
         <h3>Heavy Dumbbells</h3>
         <p class="price">140 TND</p>
         <button onclick="addToCart('Dumbbells Heavy',140)">➕ Add to Cart</button>
     </div>
 
-    <div class="card">
+    <div class="card" data-name="Home Fitness Treadmill" data-category="cardio" data-price="1200">
         <img src="Home Fitness Treadmill.jpg">
         <h3>Home Fitness Treadmill</h3>
         <p class="price">1200 TND</p>
         <button onclick="addToCart('Treadmill',1200)">➕ Add to Cart</button>
     </div>
 
-    <div class="card">
+    <div class="card" data-name="Elite Power Rack System" data-category="strength" data-price="1800">
         <img src="power-rack.jpg">
         <h3>Elite Power Rack System</h3>
         <p class="price">1800 TND</p>
         <button onclick="addToCart('Power Rack',1800)">➕ Add to Cart</button>
     </div>
-    <div class="card">
+    <div class="card" data-name="2 dumbbel 1.5k" data-category="weights" data-price="29">
         <img src="2 dumbbel 1.5k.jpg">
         <h3>2 dumbbel 1.5k</h3>
         <p class="price">29 TND</p>
@@ -101,13 +120,58 @@
             <p class="items-total">Items: <span id="itemsTotal">0</span></p>
             <p>Total: <span id="total">0</span> TND</p>
         </div>
-        <!-- Existing JS feature is preserved and now accessible from UI -->
-        <button class="order-btn" onclick="sendOrder()">Place Order</button>
+        <div class="cart-actions">
+            <button class="order-btn secondary" onclick="openCheckout()">Checkout</button>
+            <!-- Existing JS feature is preserved and now accessible from UI -->
+            <button class="order-btn" onclick="sendOrder()">Place Order</button>
+        </div>
     </div>
 </div>
 
 <div id="notif" class="notif"></div>
 <div id="backdrop" class="backdrop" onclick="toggleCart()"></div>
+
+<div id="checkoutModal" class="checkout-modal" aria-hidden="true">
+    <div class="checkout-panel" role="dialog" aria-modal="true" aria-label="Fake checkout">
+        <button class="close-btn checkout-close" onclick="closeCheckout()" aria-label="Close checkout">✕</button>
+        <h2>Secure Checkout</h2>
+        <p class="checkout-subtitle">Complete your order details (demo flow)</p>
+        <form id="checkoutForm" onsubmit="submitFakeCheckout(event)">
+            <label>
+                Full Name
+                <input type="text" id="customerName" required>
+            </label>
+            <label>
+                Email
+                <input type="email" id="customerEmail" required>
+            </label>
+            <label>
+                Address
+                <input type="text" id="customerAddress" required>
+            </label>
+            <label>
+                Payment Method
+                <select id="paymentMethod" required>
+                    <option value="card">Credit Card</option>
+                    <option value="cash">Cash on Delivery</option>
+                </select>
+            </label>
+            <button type="submit" class="order-btn">Confirm Order</button>
+        </form>
+        <div id="checkoutConfirmation" class="checkout-confirmation">
+            <h3>Order Confirmed 🎉</h3>
+            <p>Thanks! This is a fake checkout confirmation for demo purposes.</p>
+        </div>
+    </div>
+</div>
+
+<footer class="site-footer">
+    <div class="footer-inner">
+        <p class="footer-name">Built by Your Name</p>
+        <a class="footer-contact" href="mailto:your.email@example.com">your.email@example.com</a>
+        <p class="footer-copy">© 2026 Gym Store. All rights reserved.</p>
+    </div>
+</footer>
 
 <script src="script.js"></script>
 

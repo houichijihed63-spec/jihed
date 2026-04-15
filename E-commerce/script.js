@@ -1,5 +1,6 @@
 let cart = [];
 let notifTimeout;
+let filtersInitialized = false;
 
 function normalizeName(name) {
     return String(name || "").toLowerCase().trim();
@@ -77,6 +78,47 @@ function addToCart(name, price) {
     setTimeout(completeAdd, 420);
 }
 
+function getFilteredCards() {
+    const searchInput = document.getElementById("searchInput");
+    const categoryFilter = document.getElementById("categoryFilter");
+    const priceFilter = document.getElementById("priceFilter");
+    const cards = document.querySelectorAll(".products .card");
+
+    const query = normalizeName(searchInput ? searchInput.value : "");
+    const category = categoryFilter ? categoryFilter.value : "all";
+    const priceLimit = priceFilter ? priceFilter.value : "all";
+
+    cards.forEach((card) => {
+        const name = normalizeName(card.dataset.name || card.querySelector("h3")?.textContent || "");
+        const cardCategory = normalizeName(card.dataset.category || "");
+        const cardPrice = Number(card.dataset.price || 0);
+
+        const matchesSearch = !query || name.includes(query);
+        const matchesCategory = category === "all" || cardCategory === category;
+        const matchesPrice = priceLimit === "all" || cardPrice <= Number(priceLimit);
+        const shouldShow = matchesSearch && matchesCategory && matchesPrice;
+
+        card.style.display = shouldShow ? "" : "none";
+    });
+}
+
+function initFiltering() {
+    if (filtersInitialized) return;
+
+    const searchInput = document.getElementById("searchInput");
+    const categoryFilter = document.getElementById("categoryFilter");
+    const priceFilter = document.getElementById("priceFilter");
+
+    [searchInput, categoryFilter, priceFilter].forEach((element) => {
+        if (!element) return;
+        element.addEventListener("input", getFilteredCards);
+        element.addEventListener("change", getFilteredCards);
+    });
+
+    filtersInitialized = true;
+    getFilteredCards();
+}
+
 function removeCartItemByName(name) {
     const target = normalizeName(name);
     const index = cart.findIndex((item) => normalizeName(item.name) === target);
@@ -84,6 +126,50 @@ function removeCartItemByName(name) {
     cart.splice(index, 1);
     updateCart();
     showNotif("Item removed from cart");
+}
+
+function openCheckout() {
+    const modal = document.getElementById("checkoutModal");
+    const confirmation = document.getElementById("checkoutConfirmation");
+    const form = document.getElementById("checkoutForm");
+
+    if (cart.length === 0) {
+        showNotif("Votre panier est vide", "error");
+        return;
+    }
+
+    if (!modal) return;
+    modal.classList.add("active");
+    modal.setAttribute("aria-hidden", "false");
+
+    if (confirmation) {
+        confirmation.classList.remove("show");
+    }
+    if (form) {
+        form.classList.remove("hide");
+    }
+}
+
+function closeCheckout() {
+    const modal = document.getElementById("checkoutModal");
+    if (!modal) return;
+    modal.classList.remove("active");
+    modal.setAttribute("aria-hidden", "true");
+}
+
+function submitFakeCheckout(event) {
+    event.preventDefault();
+    const form = document.getElementById("checkoutForm");
+    const confirmation = document.getElementById("checkoutConfirmation");
+
+    if (form) {
+        form.classList.add("hide");
+    }
+    if (confirmation) {
+        confirmation.classList.add("show");
+    }
+
+    showNotif("Checkout complete (demo)");
 }
 
 function updateCart() {
@@ -164,6 +250,7 @@ function sendOrder() {
 
 // Initialize safe default UI state
 updateCart();
+initFiltering();
 
 document.addEventListener("click", (event) => {
     const button = event.target.closest(".card button");
@@ -174,4 +261,10 @@ document.addEventListener("click", (event) => {
     button.classList.remove("ripple");
     void button.offsetWidth;
     button.classList.add("ripple");
+});
+
+document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+        closeCheckout();
+    }
 });
