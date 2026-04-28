@@ -172,3 +172,20 @@ document.querySelector('.contact').addEventListener('submit', e => {
         }, 2000);
     }, 1000);
 });
+const myProjects = [
+    { title: "🍔 Restaurant", desc: "Full Management System", link: "restaurant/index.html" },
+    { title: "💎 To-Do List", desc: "Task Manager App", link: "todo/index.html" },
+    { title: "🌐 Portfolio", desc: "Modern UI Experience", link: "index.html" }
+];
+
+const container = document.getElementById('projects-container');
+
+myProjects.forEach(proj => {
+    container.innerHTML += `
+        <article class="project">
+            <h3>${proj.title}</h3>
+            <p>${proj.desc}</p>
+            <a href="${proj.link}" class="btn">Execute_Project</a>
+        </article>
+    `;
+});

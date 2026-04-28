@@ -152,20 +152,35 @@ border-color:var(--primary);
 box-shadow: 0 10px 30px rgba(0,242,255,0.1), inset 0 0 20px rgba(0,242,255,0.05);
 }
 
-/* Projects */
-.projects{
-display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;
+/* تحسين كارت المشروع */
+.project {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(0, 242, 255, 0.2);
+    border-radius: 8px;
+    padding: 30px;
+    position: relative;
+    overflow: hidden;
 }
-.project{
-padding:20px;border:1px solid rgba(255,255,255,0.1);
-transition:0.3s;
+
+/* تحسين الزر ليكون واضحاً */
+.project .btn {
+    display: inline-block;
+    margin-top: 15px;
+    color: var(--primary); /* اللون السماوي المضيء */
+    border: 1px solid var(--primary);
+    background: transparent;
+    padding: 8px 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.8rem;
 }
-.project:hover{
-border-color:var(--primary);
-background: rgba(0,242,255,0.05);
-box-shadow: 0 0 20px rgba(0,242,255,0.1);
-transform: scale(1.02);
+
+/* تأثير عند تمرير الماوس على الكارت */
+.project:hover {
+    background: rgba(0, 242, 255, 0.05);
+    box-shadow: 0 0 25px rgba(0, 242, 255, 0.15);
 }
+
 
 /* Contact */
 .contact{
