@@ -195,6 +195,12 @@ const myProjectsData = [
         desc: "The very portfolio you are browsing.", 
         link: "index.html" 
     }
+    { 
+    icon: "🏋️", 
+    title: "GYMP Manager", 
+    desc: "A comprehensive Gym Management System with dashboard and client tracking.", 
+    link: "gymp/index.html" 
+},
 ];
 
 // تحديد الحاوية التي سنضيف إليها المشاريع
