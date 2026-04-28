@@ -181,6 +181,95 @@ box-shadow: 0 10px 30px rgba(0,242,255,0.1), inset 0 0 20px rgba(0,242,255,0.05)
     box-shadow: 0 0 25px rgba(0, 242, 255, 0.15);
 }
 
+/* --- قسم المشاريع المطور --- */
+
+/* حاوية المشاريع لضمان التنسيق */
+.projects-dynamic-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* كروت أعرض قليلاً */
+    gap: 30px; /* مسافة أفضل بين الكروت */
+    margin-top: 40px;
+}
+
+/* تصميم كارت المشروع */
+.project-card {
+    background: rgba(255, 255, 255, 0.02); /* خلفية زجاجية شفافة جداً */
+    border: 1px solid rgba(0, 242, 255, 0.1); /* إطار باهت جداً */
+    border-radius: 12px; /* زوايا أنعم */
+    padding: 25px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* حركة أنعم */
+}
+
+/* الرمز الأيقوني (الأيموجي) */
+.project-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* وصف المشروع */
+.project-card p {
+    color: #aaa;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    height: 3.2em; /* تحديد ارتفاع النص لضمان تساوى الكروت */
+    overflow: hidden;
+}
+
+/* الزر الجديد (التباين العالي) */
+.project-card .btn-execute {
+    display: inline-block;
+    color: var(--primary); /* اللون السماوي المضيء */
+    border: 1px solid var(--primary);
+    background: transparent;
+    padding: 10px 25px;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+/* --- تأثيرات التحويم (Hover Effects) --- */
+
+.project-card:hover {
+    background: rgba(0, 242, 255, 0.03); /* زيادة شفافية الخلفية */
+    border-color: var(--primary); /* تلوين الإطار */
+    box-shadow: 0 10px 30px rgba(0, 242, 255, 0.1); /* وهج خارجي */
+    transform: translateY(-10px); /* حركة للأعلى */
+}
+
+/* تأثير الوهج الخلفي (Backglow) */
+.project-card::after {
+    content: '';
+    position: absolute;
+    bottom: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(0, 242, 255, 0.05) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.project-card:hover::after {
+    opacity: 1;
+}
+
+/* حركة الزر عند التحويم */
+.project-card:hover .btn-execute {
+    background: var(--primary);
+    color: #000;
+    box-shadow: 0 0 15px var(--primary);
+}
+
 
 /* Contact */
 .contact{

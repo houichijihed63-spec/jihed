@@ -189,3 +189,43 @@ myProjects.forEach(proj => {
         </article>
     `;
 });
+/* --- نظام توليد المشاريع الديناميكي --- */
+
+// مصفوفة تحتوي على بيانات جميع مشاريعك
+const myProjectsData = [
+    { 
+        icon: "🍔", 
+        title: "Restaurant Management", 
+        desc: "A full digital system for restaurants.", 
+        link: "restaurant/index.html" 
+    },
+    { 
+        icon: "💎", 
+        title: "To-Do List Manager", 
+        desc: "A modern task organizer app.", 
+        link: "todo/index.html" 
+    },
+    { 
+        icon: "🌐", 
+        title: "Portfolio .EXE", 
+        desc: "The very portfolio you are browsing.", 
+        link: "index.html" 
+    }
+];
+
+// تحديد الحاوية التي سنضيف إليها المشاريع
+const projectsContainer = document.getElementById('projects-dynamic-container');
+
+// التحقق من وجود الحاوية لتجنب الأخطاء
+if(projectsContainer) {
+    myProjectsData.forEach(project => {
+        // إنشاء هيكل الـ HTML لكل مشروع
+        projectsContainer.innerHTML += `
+            <article class="project-card">
+                <h3><span>${project.icon}</span> ${project.title}</h3>
+                <p>${project.desc}</p>
+                <a href="${project.link}" class="btn-execute">Execute_Project</a>
+            </article>
+        `;
+    });
+}
