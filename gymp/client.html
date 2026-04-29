@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clients & Abonnements - GYM PREMIUM</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="dashboard-shell">
+    <aside class="dashboard-sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-icon">G</div>
+        <div>
+          <p class="brand-label">GYM</p>
+          <p class="brand-subtitle">PREMIUM</p>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="sidebar-link">
+          <span>Tableau de Bord</span>
+        </a>
+        <a href="client.html" class="sidebar-link active">
+          <span>Clients & Abonnements</span>
+        </a>
+        <a href="trainers.html" class="sidebar-link">
+          <span>Entraîneurs</span>
+        </a>
+        <a href="presences.html" class="sidebar-link">
+          <span>Présences</span>
+        </a>
+        <a href="salaries.html" class="sidebar-link">
+          <span>Salaires</span>
+        </a>
+        <a href="finance.html" class="sidebar-link">
+          <span>Finances</span>
+        </a>
+        <a href="#" class="sidebar-link">
+          <span>Utilisateurs</span>
+        </a>
+        <a href="#" class="sidebar-link">
+          <span>Messages</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-logout">
+        <button class="logout-button">Déconnexion</button>
+      </div>
+    </aside>
+
+    <main class="dashboard-main">
+      <header class="dashboard-header">
+        <div>
+          <p class="small-label">Clients & Abonnements</p>
+          <h1>Gestion des clients et de leurs abonnements</h1>
+        </div>
+        <div class="dashboard-header-actions">
+          <button class="icon-button">🔍</button>
+          <div class="profile-card">
+            <div class="avatar">J</div>
+            <div>
+              <p class="profile-name">Jihed Gym</p>
+              <p class="profile-role">Administrateur</p>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="clients-topbar">
+        <div class="search-shell">
+          <input type="text" placeholder="Rechercher un client par nom ou téléphone..." />
+        </div>
+        <button class="primary-button" id="openClientModal">Ajouter un Client</button>
+      </section>
+
+      <div class="client-modal-overlay" id="clientModal" aria-hidden="true">
+        <div class="client-modal" role="dialog" aria-modal="true" aria-labelledby="clientModalTitle">
+          <button class="client-modal-close" id="closeClientModal" aria-label="Fermer la fenêtre">✕</button>
+          <div class="client-modal-header">
+            <p class="small-label">Ajouter un Nouveau Client</p>
+            <h2 id="clientModalTitle">Remplissez les informations du client et son abonnement</h2>
+          </div>
+          <form class="client-modal-form" id="clientForm">
+            <div class="form-grid">
+              <label>
+                Prénom *
+                <input type="text" id="clientFirstName" placeholder="Ex: Ahmed" required />
+              </label>
+              <label>
+                Nom *
+                <input type="text" id="clientLastName" placeholder="Ex: Ben Ali" required />
+              </label>
+              <label class="full-width">
+                Numéro de Téléphone *
+                <input type="tel" id="clientPhone" placeholder="Ex: 98765432" required pattern="[0-9]{8}" />
+              </label>
+              <label>
+                Type d'Abonnement *
+                <select id="clientSubscriptionType" required>
+                  <option value="mensuel">Mensuel (75 TND)</option>
+                  <option value="three">Trois mois (200 TND)</option>
+                  <option value="six">Six mois (380 TND)</option>
+                </select>
+              </label>
+              <label>
+                Date Début *
+                <input type="date" id="clientStartDate" required />
+              </label>
+              <label>
+                Date Fin *
+                <input type="date" id="clientEndDate" required />
+              </label>
+            </div>
+            <div class="client-total">
+              <span>Prix Total</span>
+              <strong id="clientPrice">75 TND</strong>
+            </div>
+            <div class="modal-actions">
+              <button type="button" class="secondary-button" id="cancelClient">Annuler</button>
+              <button type="submit" class="primary-button">Enregistrer</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <section class="clients-table-shell">
+        <div class="table-header">
+          <h2 id="clientsCount">Liste des Clients (10)</h2>
+        </div>
+        <div class="table-scroll">
+          <table class="clients-table">
+            <thead>
+              <tr>
+                <th>Nom</th>
+                <th>Téléphone</th>
+                <th>Type Abonnement</th>
+                <th>Date Début</th>
+                <th>Date Fin</th>
+                <th>Prix</th>
+                <th>Statut</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="clientsTableBody">
+              <tr>
+                <td>
+                  <strong>Ahmed Ben Ali</strong>
+                </td>
+                <td>98765432</td>
+                <td>Mensuel</td>
+                <td>2026-01-15</td>
+                <td>2026-04-15</td>
+                <td>75 TND</td>
+                <td><span class="status-badge success">Actif</span></td>
+                <td class="actions-cell">
+                  <button class="icon-small">✏️</button>
+                  <button class="icon-small danger">🗑️</button>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Aicha Mohammadi</strong></td>
+                <td>90987654</td>
+                <td>Trois mois</td>
+                <td>2026-01-10</td>
+                <td>2026-04-10</td>
+                <td>200 TND</td>
+                <td><span class="status-badge success">Actif</span></td>
+                <td class="actions-cell">
+                  <button class="icon-small">✏️</button>
+                  <button class="icon-small danger">🗑️</button>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Fatima Saidi</strong></td>
+                <td>97654321</td>
+                <td>Trois mois</td>
+                <td>2026-02-01</td>
+                <td>2026-05-01</td>
+                <td>200 TND</td>
+                <td><span class="status-badge success">Actif</span></td>
+                <td class="actions-cell">
+                  <button class="icon-small">✏️</button>
+                  <button class="icon-small danger">🗑️</button>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Khaled Tounsi</strong></td>
+                <td>94321098</td>
+                <td>Six mois</td>
+                <td>2026-01-05</td>
+                <td>2026-07-05</td>
+                <td>380 TND</td>
+                <td><span class="status-badge success">Actif</span></td>
+                <td class="actions-cell">
+                  <button class="icon-small">✏️</button>
+                  <button class="icon-small danger">🗑️</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
