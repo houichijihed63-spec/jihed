@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Finances - GYM PREMIUM</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="dashboard-shell">
+    <aside class="dashboard-sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-icon">G</div>
+        <div>
+          <p class="brand-label">GYM</p>
+          <p class="brand-subtitle">PREMIUM</p>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="sidebar-link">
+          <span>Tableau de Bord</span>
+        </a>
+        <a href="client.html" class="sidebar-link">
+          <span>Clients & Abonnements</span>
+        </a>
+        <a href="trainers.html" class="sidebar-link">
+          <span>Entraîneurs</span>
+        </a>
+        <a href="presences.html" class="sidebar-link">
+          <span>Présences</span>
+        </a>
+        <a href="salaries.html" class="sidebar-link">
+          <span>Salaires</span>
+        </a>
+        <a href="finance.html" class="sidebar-link active">
+          <span>Finances</span>
+        </a>
+        <a href="#" class="sidebar-link">
+          <span>Utilisateurs</span>
+        </a>
+        <a href="#" class="sidebar-link">
+          <span>Messages</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-logout">
+        <button class="logout-button">Déconnexion</button>
+      </div>
+    </aside>
+
+    <main class="dashboard-main">
+      <header class="dashboard-header">
+        <div class="dashboard-search">
+          <input type="text" placeholder="Rechercher un client ou entraîneur..." aria-label="Rechercher" />
+        </div>
+        <div class="dashboard-header-actions">
+          <button class="icon-button">🔔</button>
+          <div class="profile-card">
+            <div class="avatar">J</div>
+            <div>
+              <p class="profile-name">Jihed Gym</p>
+              <p class="profile-role">Administrateur</p>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="dashboard-intro">
+        <div>
+          <p class="small-label">Dépenses & Bénéfices</p>
+          <h1>Gestion du budget et planification financière</h1>
+        </div>
+        <div class="status-chip">
+          <span>Finances</span>
+          <span class="status-time"></span>
+        </div>
+      </section>
+
+      <section class="card-grid">
+        <article class="metric-card green">
+          <span class="metric-icon">💰</span>
+          <p class="metric-title">Total Revenus</p>
+          <p class="metric-value">5300 TND</p>
+          <p class="metric-delta">+8% ce mois</p>
+        </article>
+
+        <article class="metric-card brown">
+          <span class="metric-icon">📉</span>
+          <p class="metric-title">Total Dépenses</p>
+          <p class="metric-value">3262 TND</p>
+          <p class="metric-delta">-2% ce mois</p>
+        </article>
+
+        <article class="metric-card blue">
+          <span class="metric-icon">📈</span>
+          <p class="metric-title">Bénéfices Nets</p>
+          <p class="metric-value">2038 TND</p>
+          <p class="metric-delta">+11% ce mois</p>
+        </article>
+      </section>
+
+      <section class="dashboard-grid">
+        <article class="panel-card finance-overview-card">
+          <div class="panel-card-header">
+            <h3>Détails des Dépenses</h3>
+            <span>Ventilation</span>
+          </div>
+          <div class="finance-list">
+            <div class="finance-item">
+              <div>
+                <p>Salaires Entraîneurs</p>
+                <span>Coût mensuel</span>
+              </div>
+              <strong>2592 TND</strong>
+            </div>
+            <div class="finance-item">
+              <div>
+                <p>Agent Nettoyage</p>
+                <span>40 TND/jour × 2×/semaine</span>
+              </div>
+              <strong>320 TND</strong>
+            </div>
+            <div class="finance-item">
+              <div>
+                <p>Factures Électricité</p>
+                <span>Dépense opérationnelle</span>
+              </div>
+              <strong>150 TND</strong>
+            </div>
+            <div class="finance-item">
+              <div>
+                <p>Fournitures & Maintenance</p>
+                <span>Entretien matériel</span>
+              </div>
+              <strong>200 TND</strong>
+            </div>
+          </div>
+        </article>
+
+        <aside class="summary-panel finance-summary-panel">
+          <div class="summary-card">
+            <p>Détails des Revenus</p>
+            <div class="finance-list finance-list--compact">
+              <div class="finance-item">
+                <div>
+                  <p>Revenus Abonnements</p>
+                  <span>Entrées fixes</span>
+                </div>
+                <strong>5000 TND</strong>
+              </div>
+              <div class="finance-item">
+                <div>
+                  <p>Revenus Supplémentaires</p>
+                  <span>Services & coaching</span>
+                </div>
+                <strong>300 TND</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="summary-card badge-card">
+            <p>Total</p>
+            <strong>5300 TND</strong>
+          </div>
+
+          <div class="summary-card badge-card">
+            <p>Bénéfice Net</p>
+            <strong>2038 TND</strong>
+          </div>
+        </aside>
+      </section>
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

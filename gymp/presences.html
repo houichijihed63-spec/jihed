@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Présences - GYM PREMIUM</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+
+    .dashboard-header,
+    .dashboard-intro,
+    .clients-table th,
+    .clients-table td,
+    .search-shell input,
+    .panel-card-header {
+      text-align: right;
+    }
+
+    .dashboard-header-actions {
+      justify-content: flex-start;
+    }
+
+    .clients-topbar {
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .clients-topbar .search-shell {
+      flex: 1;
+      min-width: 220px;
+    }
+
+    .clients-topbar .primary-button {
+      min-width: 220px;
+    }
+
+    .status-panel-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .presence-card {
+      padding: 1.5rem;
+      border-radius: 28px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.14);
+    }
+
+    .presence-card h3 {
+      margin: 0 0 1rem;
+    }
+
+    .presence-card p {
+      color: var(--muted);
+      margin: 0.5rem 0 1rem;
+      line-height: 1.75;
+    }
+
+    .presence-card select,
+    .presence-card input {
+      width: 100%;
+      padding: 1rem 1rem;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+
+    .presence-card button {
+      width: 100%;
+      padding: 1rem 1.2rem;
+      border-radius: 18px;
+      border: none;
+      background: linear-gradient(135deg, rgba(255, 133, 5, 0.95), rgba(255, 79, 25, 0.95));
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .status-chip {
+      justify-content: flex-end;
+    }
+
+    .presence-history {
+      margin-top: 1.5rem;
+    }
+
+    .presence-history h2 {
+      margin: 0 0 1rem;
+    }
+
+    .presence-history .table-scroll {
+      overflow-x: auto;
+    }
+
+    .presence-history .clients-table {
+      min-width: 960px;
+    }
+
+    @media (max-width: 980px) {
+      .status-panel-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard-shell">
+    <aside class="dashboard-sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-icon">G</div>
+        <div>
+          <p class="brand-label">GYM</p>
+          <p class="brand-subtitle">PREMIUM</p>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="sidebar-link">
+          <span>Tableau de Bord</span>
+        </a>
+        <a href="client.html" class="sidebar-link">
+          <span>Clients & Abonnements</span>
+        </a>
+        <a href="trainers.html" class="sidebar-link">
+          <span>Entraîneurs</span>
+        </a>
+        <a href="presences.html" class="sidebar-link active">
+          <span>Présences</span>
+        </a>
+        <a href="salaries.html" class="sidebar-link">
+          <span>Salaires</span>
+        </a>
+        <a href="finance.html" class="sidebar-link">
+          <span>Finances</span>
+        </a>
+        <a href="#" class="sidebar-link">
+          <span>Utilisateurs</span>
+        </a>
+        <a href="#" class="sidebar-link">
+          <span>Messages</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-logout">
+        <button class="logout-button">Déconnexion</button>
+      </div>
+    </aside>
+
+    <main class="dashboard-main">
+      <header class="dashboard-header">
+        <div>
+          <p class="small-label">Gestion des présences</p>
+          <h1>Journal de présence et de sortie des entraîneurs</h1>
+        </div>
+        <div class="dashboard-header-actions">
+          <button class="icon-button">🔔</button>
+          <div class="profile-card">
+            <div class="avatar">G</div>
+            <div>
+              <p class="profile-name">Gym Head</p>
+              <p class="profile-role">Administrateur système</p>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="presence-card">
+        <h3>Enregistrer entrée / sortie</h3>
+        <p>Sélectionnez un entraîneur puis enregistrez rapidement son arrivée ou son départ.</p>
+        <select id="presenceTrainerSelect">
+          <option value="">Choisir un entraîneur...</option>
+        </select>
+        <select id="presenceEventType">
+          <option value="">Type d'événement</option>
+          <option value="Entrée">Entrée</option>
+          <option value="Sortie">Sortie</option>
+        </select>
+        <button class="primary-button" id="savePresenceButton">Enregistrer</button>
+      </section>
+
+      <section class="status-panel-grid">
+        <article class="presence-card">
+          <h3>Résumé du jour</h3>
+          <div class="status-chip">
+            <span>Entraîneurs présents</span>
+            <span id="presentCountValue">0</span>
+          </div>
+          <div class="status-chip">
+            <span>Événements aujourd'hui</span>
+            <span id="todayEventsValue">0</span>
+          </div>
+        </article>
+        <article class="presence-card">
+          <h3>Détails rapides</h3>
+          <p>Suivez les entrées et sorties des entraîneurs directement ici, et affichez clairement le journal du jour.</p>
+          <div class="status-chip">
+            <span>Dernière mise à jour</span>
+            <span>il y a une minute</span>
+          </div>
+        </article>
+      </section>
+
+      <section class="presence-history">
+        <div class="table-header">
+          <h2>Journal des présences</h2>
+        </div>
+        <div class="table-scroll">
+          <table class="clients-table">
+            <thead>
+              <tr>
+                <th>Nom de l'entraîneur</th>
+                <th>Date</th>
+                <th>Heure</th>
+                <th>Type</th>
+                <th>Statut</th>
+              </tr>
+            </thead>
+            <tbody id="presenceHistoryBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

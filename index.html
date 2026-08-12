@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jihed.exe - Principal UI Engineer</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>">
+</head>
+<body>
+    <!-- LOADING SCREEN -->
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <div class="loader-logo">
+                <span class="logo-glow">jihed</span><span class="logo-glow exe">.exe</span>
+            </div>
+            <div class="loader-bar">
+                <div class="loader-progress" id="loader-progress"></div>
+            </div>
+            <div class="loader-text">Initializing Portfolio v2.0...</div>
+            <div class="loader-dots">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- HEADER -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="logo">
+                <span>jihed</span><span class="exe">.exe</span>
+            </div>
+            <nav class="nav" id="nav">
+                <a href="#home" class="nav-link active" data-section="home">Home</a>
+                <a href="#projects" class="nav-link" data-section="projects">Projects</a>
+                <a href="#skills" class="nav-link" data-section="skills">Skills</a>
+                <a href="#contact" class="nav-link" data-section="contact">Contact</a>
+            </nav>
+            <button class="menu-toggle" id="menu-toggle" aria-label="Toggle Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
+        <div class="hero-bg"></div>
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <div class="system-boot">
+                        <span class="blink">></span> <span>system.boot()</span>
+                    </div>
+                    <h1 class="hero-title">
+                        jihed<span class="gradient-text">.exe</span>
+                    </h1>
+                    <p class="hero-subtitle">
+                        Principal UI Engineer | Full Stack Developer | Experience Architect
+                    </p>
+                    
+                    <div class="code-block">
+                        <pre><code><span class="code-comment">// Profile Matrix</span>
+<span class="code-keyword">const</span> <span class="code-variable">engineer</span> = {
+  <span class="code-property">role</span>: <span class="code-string">"Principal UI Engineer"</span>,
+  <span class="code-property">stack</span>: [<span class="code-string">"React"</span>, <span class="code-string">"Node.js"</span>, <span class="code-string">"TypeScript"</span>],
+  <span class="code-property">status</span>: <span class="code-string">"🚀 Deployed"</span>,
+  <span class="code-property">mission</span>: <span class="code-string">"Digital Excellence"</span>
+};</code></pre>
+                    </div>
+
+                    <div class="cta-buttons">
+                        <a href="#projects" class="btn btn-primary" data-scroll>
+                            <span>Explore Projects</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                        <a href="#contact" class="btn btn-secondary" data-scroll>
+                            <span>Let's Talk</span>
+                            <i class="fas fa-message"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="hero-visual">
+                    <div class="terminal-window">
+                        <div class="terminal-header">
+                            <div class="terminal-controls">
+                                <div class="terminal-dot red"></div>
+                                <div class="terminal-dot yellow"></div>
+                                <div class="terminal-dot green"></div>
+                            </div>
+                            <div class="terminal-title">jihed@portfolio:~$</div>
+                        </div>
+                        <div class="terminal-body" id="terminal-body">
+                            <div class="terminal-line"><span class="prompt">$</span> whoami</div>
+                            <div class="terminal-output gradient-text">jihed.exe - Principal UI Engineer</div>
+                            <div class="terminal-line"><span class="prompt">$</span> status</div>
+                            <div class="terminal-output gradient-text">Status: LIVE 🚀 99.9% uptime</div>
+                            <div class="terminal-line typing" id="typing-line">
+                                <span class="prompt">$</span> node career.js<span class="cursor">█</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS SECTION -->
+    <section class="projects section" id="projects">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Featured Projects</h2>
+                <p class="section-subtitle">// Production-Grade Applications</p>
+            </div>
+
+            <div class="projects-grid">
+                <div class="project-card" data-aos="fade-up">
+                    <div class="project-header">
+                        <div class="project-icon">🚀</div>
+                        <div class="project-badge live">LIVE</div>
+                    </div>
+                    <h3>Restaurant Management System</h3>
+                    <p>Full-stack ordering platform with real-time kitchen display, analytics dashboard, and Stripe payments.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">MongoDB</span>
+                        <span class="tech-tag">Socket.io</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="btn btn-sm primary">Live Demo</a>
+                        <a href="#" class="btn btn-sm secondary">View Code</a>
+                    </div>
+                </div>
+
+                <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="project-header">
+                        <div class="project-icon">📱</div>
+                        <div class="project-badge new">NEW</div>
+                    </div>
+                    <h3>Smart To-Do</h3>
+                    <p>AI-powered task manager with smart categorization, productivity insights, and cross-platform sync.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Vue 3</span>
+                        <span class="tech-tag">Firebase</span>
+                        <span class="tech-tag">Tailwind</span>
+                        <span class="tech-tag">PWA</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="btn btn-sm primary">Live Demo</a>
+                        <a href="#" class="btn btn-sm secondary">View Code</a>
+                    </div>
+                </div>
+
+                <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="project-header">
+                        <div class="project-icon">🌐</div>
+                        <div class="project-badge featured">Featured</div>
+                    </div>
+                    <h3>This Portfolio</h3>
+                    <p>Cutting-edge responsive portfolio with advanced animations, smooth scrolling, and cyberpunk aesthetics.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">HTML5</span>
+                        <span class="tech-tag">CSS3</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">GSAP</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="btn btn-sm primary">View Source</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS SECTION -->
+    <section class="skills section" id="skills">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Technical Arsenal</h2>
+                <p class="section-subtitle">// Full-Stack Mastery</p>
+            </div>
+
+            <div class="skills-grid">
+                <div class="skill-category" data-aos="fade-up">
+                    <h3><i class="fas fa-code"></i> Frontend</h3>
+                    <div class="skill-list">
+                        <span>React.js / Next.js</span>
+                        <span>Vue.js / Nuxt.js</span>
+                        <span>TypeScript</span>
+                        <span>Tailwind CSS</span>
+                        <span>WebGL / Three.js</span>
+                    </div>
+                </div>
+
+                <div class="skill-category" data-aos="fade-up" data-aos-delay="100">
+                    <h3><i class="fas fa-server"></i> Backend</h3>
+                    <div class="skill-list">
+                        <span>Node.js / Express</span>
+                        <span>Python / FastAPI</span>
+                        <span>GraphQL / REST</span>
+                        <span>PostgreSQL / MongoDB</span>
+                        <span>Redis / RabbitMQ</span>
+                    </div>
+                </div>
+
+                <div class="skill-category" data-aos="fade-up" data-aos-delay="200">
+                    <h3><i class="fas fa-tools"></i> DevOps</h3>
+                    <div class="skill-list">
+                        <span>Docker / Kubernetes</span>
+                        <span>AWS / GCP / Vercel</span>
+                        <span>CI/CD Pipelines</span>
+                        <span>GitHub Actions</span>
+                        <span>Terraform</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="contact section" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Let's Connect</h2>
+                <p class="section-subtitle">// Ready for your next project?</p>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>jihed@portfolio.com</h3>
+                    <div class="contact-links">
+                        <a href="#" class="contact-link" aria-label="GitHub">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                        <a href="#" class="contact-link" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin"></i> LinkedIn
+                        </a>
+                        <a href="#" class="contact-link" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i> Twitter
+                        </a>
+                    </div>
+                </div>
+
+                <form class="contact-form" id="contact-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="text" name="name" placeholder="Your Name" required>
+                            <label>Name</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="email" placeholder="Your Email" required>
+                            <label>Email</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <textarea name="message" placeholder="Tell me about your project..." rows="5" required></textarea>
+                        <label>Message</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary full-width">
+                        Send Message <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 <span class="gradient-text">jihed.exe</span> | Crafted with <i class="fas fa-heart"></i> | All rights reserved</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

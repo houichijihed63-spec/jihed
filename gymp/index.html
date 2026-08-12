@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Application GYM · Jihed</title>
+  <style>
+    :root {
+      --bg: #020714;
+      --surface: rgba(10, 24, 50, 0.88);
+      --cyan: #00f4ff;
+      --blue: #0fb2ff;
+      --text: #eef7ff;
+      --muted: #7ca1bf;
+      --accent: #0ff8d1;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      color: var(--text);
+      background: radial-gradient(circle at top left, rgba(0, 244, 255, 0.14), transparent 20%),
+                  radial-gradient(circle at bottom right, rgba(11, 178, 255, 0.12), transparent 18%),
+                  var(--bg);
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+
+    body {
+      position: relative;
+      overflow: hidden;
+    }
+
+    body::before,
+    body::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle, rgba(255,255,255,0.06), transparent 25%);
+      opacity: 0.5;
+      pointer-events: none;
+      animation: drift 18s linear infinite;
+    }
+
+    body::after {
+      background: linear-gradient(90deg, transparent, rgba(0, 244, 255, 0.08), transparent);
+      animation-duration: 24s;
+    }
+
+    @keyframes drift {
+      from { transform: translate3d(0,0,0); }
+      to { transform: translate3d(-15%, 10%, 0); }
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 1180px;
+      min-height: 100vh;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      padding: 32px 40px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      font-size: 0.95rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+
+    .brand span {
+      color: var(--cyan);
+    }
+
+    .menu {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .menu a {
+      border: 1px solid rgba(15, 178, 255, 0.4);
+      padding: 0.6rem 1rem;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      color: var(--text);
+      text-decoration: none;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .menu a:hover,
+    .menu a.active {
+      background: rgba(0, 244, 255, 0.14);
+      transform: translateY(-2px);
+      color: var(--cyan);
+      border-color: rgba(0, 244, 255, 0.7);
+    }
+
+    .hero {
+      margin-top: 5rem;
+      max-width: 840px;
+      padding: 2.5rem 2.2rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 36px;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 40px 120px rgba(0, 0, 0, 0.24);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top left, rgba(0, 244, 255, 0.16), transparent 24%),
+                  radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.08), transparent 18%);
+      pointer-events: none;
+      opacity: 0.65;
+    }
+
+    .hero p.status {
+      margin: 0 0 1rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(3.5rem, 7vw, 6rem);
+      line-height: 0.92;
+      letter-spacing: -0.05em;
+      text-shadow: 0 0 30px rgba(0, 244, 255, 0.16);
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 strong {
+      color: var(--text);
+      font-weight: 800;
+    }
+
+    .hero h1 span {
+      display: block;
+      color: var(--cyan);
+      font-size: clamp(4rem, 8vw, 6.5rem);
+      letter-spacing: -0.08em;
+    }
+
+    .hero p.description {
+      max-width: 700px;
+      margin: 1.5rem 0 0;
+      line-height: 1.8;
+      color: var(--muted);
+      font-size: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-card {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 2rem;
+      padding: 1rem 1.25rem;
+      border-radius: 24px;
+      background: rgba(0, 0, 0, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text);
+      box-shadow: 0 22px 60px rgba(0, 0, 0, 0.22);
+      backdrop-filter: blur(12px);
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-avatar {
+      width: 54px;
+      height: 54px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: var(--bg);
+      background: linear-gradient(180deg, rgba(0,244,255,0.94), rgba(15,178,255,0.32));
+    }
+
+    .hero-card-label {
+      margin: 0 0 0.2rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .hero-card-name {
+      margin: 0;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .actions a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 160px;
+      padding: 1rem 1.3rem;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 244, 255, 0.35);
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+    }
+
+    .actions a.primary {
+      background: rgba(0, 244, 255, 0.18);
+      box-shadow: 0 16px 40px rgba(0, 244, 255, 0.12);
+    }
+
+    .actions a:hover {
+      transform: translateY(-2px);
+      background: rgba(0, 244, 255, 0.25);
+    }
+
+    .project-section {
+      margin-top: 4rem;
+      padding: 2rem 0 3rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .project-header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: 1.4rem;
+    }
+
+    .project-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      border: 1px solid rgba(15, 178, 255, 0.24);
+      padding: 0.75rem 1rem;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.04);
+      backdrop-filter: blur(12px);
+    }
+
+    .project-title {
+      margin: 0;
+      font-size: clamp(2.8rem, 5vw, 4.2rem);
+      line-height: 1.02;
+    }
+
+    .project-subtitle {
+      margin: 0 0 2rem;
+      color: var(--muted);
+      max-width: 760px;
+      line-height: 1.8;
+      font-size: 1rem;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 0.9fr;
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
+    }
+
+    .project-card.large {
+      display: flex;
+      gap: 1.2rem;
+      min-height: 320px;
+      padding: 1.5rem;
+      align-items: center;
+    }
+
+    .project-card.short {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      align-items: center;
+      gap: 1rem;
+      min-height: 150px;
+      padding: 1.3rem;
+    }
+
+    .project-image {
+      background: linear-gradient(135deg, rgba(9, 28, 68, 0.96), rgba(5, 14, 40, 0.95));
+      border-radius: 22px;
+      min-height: 240px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 255, 255, 0.38);
+      font-size: 0.95rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 1rem;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+    }
+
+    .project-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.9rem;
+      min-width: 0;
+    }
+
+    .project-copy h3 {
+      margin: 0;
+      font-size: clamp(1.95rem, 3vw, 2.8rem);
+      line-height: 1.05;
+    }
+
+    .project-copy p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 1rem;
+    }
+
+    .project-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .project-pill {
+      padding: 0.85rem 1rem;
+      border-radius: 999px;
+      background: rgba(0, 244, 255, 0.08);
+      color: var(--text);
+      font-size: 0.92rem;
+      border: 1px solid rgba(0, 244, 255, 0.12);
+    }
+
+    .project-indicators {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1.8rem;
+      justify-content: center;
+    }
+
+    .project-indicators span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.18);
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .project-indicators span.active {
+      background: var(--cyan);
+      transform: scale(1.1);
+    }
+
+    @media (max-width: 980px) {
+      .project-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .project-card.large {
+        flex-direction: column;
+        min-height: auto;
+      }
+
+      .project-card.short {
+        grid-template-columns: 1fr;
+      }
+
+      .project-image {
+        min-height: 180px;
+      }
+    }
+
+    .panel {
+      position: absolute;
+      right: 32px;
+      bottom: 32px;
+      padding: 1rem 1.2rem;
+      background: rgba(2, 7, 20, 0.82);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      font-size: 0.78rem;
+      line-height: 1.8;
+      color: var(--muted);
+      backdrop-filter: blur(10px);
+      max-width: 220px;
+    }
+
+    .panel strong {
+      display: block;
+      color: var(--text);
+      margin-bottom: 0.35rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.72rem;
+    }
+
+    .panel span {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    @media (max-width: 760px) {
+      .container {
+        padding: 24px 20px;
+      }
+
+      .topbar {
+        justify-content: center;
+      }
+
+      .hero {
+        margin-top: 3rem;
+      }
+
+      .panel {
+        position: relative;
+        right: auto;
+        bottom: auto;
+        margin-top: 2rem;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="topbar">
+      <div class="brand">APP<span>GYM</span></div>
+      <div class="menu">
+        <a href="index.html" class="active">Accueil</a>
+        <a href="projet.html">Projet</a>
+        <a href="#presentation">Présentation</a>
+        <a href="#contact">Contact</a>
+        <a href="#download">CV</a>
+      </div>
+    </div>
+
+    <section class="hero" id="home">
+      <p class="status">PROJET DE FIN D'ÉTUDES</p>
+      <h1><strong>Application</strong> <span>GYM</span></h1>
+      <p class="description">Gestion intelligente de salle de sport, pour une expérience moderne du suivi des membres, des coachs et des séances.</p>
+      <div class="actions">
+        <a href="projet.html" class="primary">Voir le projet</a>
+        <a href="#contact">Découvrir</a>
+      </div>
+      <div class="hero-card">
+        <div class="hero-avatar">J</div>
+        <div>
+          <p class="hero-card-label">Présenté par</p>
+          <p class="hero-card-name">Jihed</p>
+        </div>
+      </div>
+    </section>
+
+    <aside class="panel">
+      <strong>OS: JIHED_OS_V5.0</strong>
+      <span><span>SECTOR:</span><span>HOME</span></span>
+      <span><span>SYNC:</span><span>0%</span></span>
+      <span><span>COORDS:</span><span>1512, 108</span></span>
+      <span><span>STATUS:</span><span>ONLINE</span></span>
+    </aside>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

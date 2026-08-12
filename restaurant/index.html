@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Restaurant Délice | Expérience Culinaire</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- Navbar -->
+<header>
+    <nav>
+        <div class="logo">
+            <span>🍔</span>
+            <h2>Délice</h2>
+        </div>
+        <button class="theme-toggle" onclick="toggleDark()" aria-label="Changer thème">
+            <span class="moon">🌙</span>
+            <span class="sun">☀️</span>
+        </button>
+    </nav>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+    <div class="hero-content">
+        <h1>Bienvenue chez Délice</h1>
+        <p>Expérience culinaire unique 🔥</p>
+    </div>
+</section>
+
+<!-- Cart Icon -->
+<div class="cart-icon" onclick="toggleCart()" aria-label="Ouvrir panier">
+    <span>🛒</span>
+    <span id="count">0</span>
+</div>
+
+<!-- Menu -->
+<main class="menu" id="menu">
+    <h2>Notre Menu</h2>
+
+    <div class="menu-container">
+
+        <article class="card fade-in">
+            <img src="burger.jpg" alt="Burger Deluxe" loading="lazy" width="260" height="150">
+            <div class="card-content">
+                <h3>Burger Deluxe</h3>
+                <p class="description">Viande + fromage + sauce</p>
+                <p class="price">800 DA</p>
+                <button onclick="addToCart('Burger Deluxe', 800)" class="btn-primary">Ajouter au panier</button>
+            </div>
+        </article>
+
+        <article class="card fade-in">
+            <img src="pizza.jpg" alt="Pizza Italienne" loading="lazy" width="260" height="150">
+            <div class="card-content">
+                <h3>Pizza Italienne</h3>
+                <p class="description">Fromage + olives</p>
+                <p class="price">900 DA</p>
+                <button onclick="addToCart('Pizza Italienne', 900)" class="btn-primary">Ajouter au panier</button>
+            </div>
+        </article>
+
+        <article class="card fade-in">
+            <img src="plat.jpg" alt="Plat spécial chef" loading="lazy" width="260" height="150">
+            <div class="card-content">
+                <h3>Plat spécial</h3>
+                <p class="description">Spécialité du chef</p>
+                <p class="price">1200 DA</p>
+                <button onclick="addToCart('Plat spécial', 1200)" class="btn-primary">Ajouter au panier</button>
+            </div>
+        </article>
+
+    </div>
+</main>
+
+<!-- Cart Sidebar -->
+<aside id="cart" class="cart">
+    <div class="cart-header">
+        <h2>🛒 Votre Panier</h2>
+        <button class="close-cart" onclick="toggleCart()" aria-label="Fermer">✕</button>
+    </div>
+    
+    <ul id="cart-items" class="cart-items"></ul>
+    
+    <div class="cart-footer">
+        <div class="cart-total">
+            <span>Total</span>
+            <strong><span id="total">0</span> DA</strong>
+        </div>
+
+        <div class="cart-actions">
+            <button onclick="sendOrder()" class="btn-primary btn-full">Commander via WhatsApp</button>
+            <button onclick="pay()" class="btn-secondary btn-full">Payer maintenant 💳</button>
+        </div>
+    </div>
+</div>
+
+<!-- Overlay -->
+<div class="overlay" onclick="toggleCart()"></div>
+
+<!-- Toast Notification -->
+<div id="toast" class="toast"></div>
+
+<!-- WhatsApp Button -->
+<a href="https://wa.me/21658020069" target="_blank" class="whatsapp" aria-label="Contactez nous sur WhatsApp">💬</a>
+
+<script src="script.js"></script>
+
+</body>
+</html>
