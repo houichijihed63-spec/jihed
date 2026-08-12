@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#0f172a">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>الفولاذ — رفع فاتورة</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:'Segoe UI',Tahoma,Arial,sans-serif;
+     background:#0f172a;color:#e2e8f0;
+     min-height:100vh;padding:1rem;
+     -webkit-font-smoothing:antialiased}
+
+/* ─── رأس الصفحة ─────────────────────────────────────────── */
+.header{text-align:center;padding:1.5rem 0 1.25rem}
+.logo{width:72px;height:72px;border-radius:50%;
+      border:3px solid #ef4444;
+      margin:0 auto .75rem;display:block;
+      object-fit:cover}
+.logo-fallback{width:72px;height:72px;border-radius:50%;
+               border:3px solid #ef4444;
+               background:#1e293b;
+               margin:0 auto .75rem;display:flex;
+               align-items:center;justify-content:center;
+               font-size:2rem}
+h1{font-size:1.35rem;color:#f1f5f9;margin-bottom:.2rem;font-weight:700}
+.subtitle{color:#64748b;font-size:.875rem}
+
+/* ─── البطاقات ───────────────────────────────────────────── */
+.card{background:#1e293b;border-radius:.875rem;
+      padding:1.25rem;margin:.75rem 0;
+      border:1px solid #334155;
+      box-shadow:0 2px 16px rgba(0,0,0,.3)}
+
+/* ─── منطقة الرفع ────────────────────────────────────────── */
+.drop-area{border:2px dashed #3b82f6;border-radius:.75rem;
+           padding:2rem 1rem;text-align:center;
+           cursor:pointer;transition:all .25s ease;
+           background:#0f172a;position:relative}
+.drop-area.drag-over{border-color:#60a5fa;background:#1e3a5f;
+                     transform:scale(1.01)}
+.drop-area input[type=file]{display:none}
+.drop-icon{font-size:3.5rem;margin-bottom:.75rem;line-height:1}
+.drop-text{color:#94a3b8;font-size:.9rem;line-height:1.7}
+.drop-text strong{color:#60a5fa;font-size:1rem}
+
+/* ─── معاينة الصورة ──────────────────────────────────────── */
+.preview{display:none;margin-top:1rem}
+.preview img{width:100%;border-radius:.625rem;
+             max-height:260px;object-fit:contain;
+             background:#0f172a;border:1px solid #334155}
+.file-info{margin-top:.5rem;font-size:.8rem;
+           color:#64748b;text-align:center}
+.img-actions{display:flex;gap:.5rem;margin-top:.75rem}
+.img-actions button{flex:1;padding:.6rem;background:#263348;
+                    color:#94a3b8;border:1px solid #334155;
+                    border-radius:.5rem;cursor:pointer;
+                    font-size:.8rem;font-family:inherit;
+                    transition:background .2s}
+.img-actions button:hover{background:#334155;color:#e2e8f0}
+
+/* ─── زر الرفع الرئيسي ───────────────────────────────────── */
+.btn-upload{display:block;width:100%;padding:1rem;
+            margin-top:1rem;
+            background:linear-gradient(135deg,#2563eb 0%,#1d4ed8 100%);
+            color:#fff;border:none;border-radius:.75rem;
+            font-size:1.05rem;font-weight:700;cursor:pointer;
+            transition:opacity .2s,transform .1s;
+            font-family:inherit;letter-spacing:.3px}
+.btn-upload:not(:disabled):active{transform:scale(.98)}
+.btn-upload:disabled{opacity:.45;cursor:not-allowed;background:#1e3a5f}
+.btn-upload:not(:disabled):hover{opacity:.92}
+
+/* ─── شريط التقدم ────────────────────────────────────────── */
+.progress{display:none;margin-top:1rem}
+.progress-track{height:10px;background:#0f172a;
+                border-radius:5px;overflow:hidden;
+                border:1px solid #334155}
+.progress-fill{height:100%;width:0;
+               background:linear-gradient(90deg,#3b82f6,#60a5fa);
+               transition:width .3s ease;border-radius:5px}
+.progress-label{display:flex;justify-content:space-between;
+                margin-top:.4rem;font-size:.8rem;color:#64748b}
+
+/* ─── رسائل الحالة ───────────────────────────────────────── */
+.status{display:none;padding:.75rem 1rem;border-radius:.5rem;
+        text-align:center;margin-top:.75rem;font-weight:600;
+        font-size:.9rem;animation:fadeIn .3s ease}
+.status.success{background:#0d2e1a;color:#4ade80;
+                border:1px solid #16a34a}
+.status.error  {background:#2d0808;color:#f87171;
+                border:1px solid #dc2626}
+.status.info   {background:#0c1e3b;color:#60a5fa;
+                border:1px solid #2563eb}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-4px)}
+                  to  {opacity:1;transform:translateY(0)}}
+
+/* ─── نصائح ──────────────────────────────────────────────── */
+.tips h3{color:#475569;font-size:.8rem;font-weight:600;
+         margin-bottom:.6rem;text-transform:uppercase;
+         letter-spacing:.5px}
+.tip-item{display:flex;align-items:flex-start;gap:.6rem;
+          padding:.35rem 0;font-size:.82rem;color:#64748b;
+          border-bottom:1px solid #1e293b}
+.tip-item:last-child{border-bottom:none}
+.tip-icon{font-size:.95rem;flex-shrink:0;margin-top:.05rem}
+
+/* ─── مؤشر الاتصال ───────────────────────────────────────── */
+.connection-badge{display:inline-flex;align-items:center;gap:.4rem;
+                  background:#0d2e1a;border:1px solid #16a34a;
+                  color:#4ade80;border-radius:999px;
+                  padding:.3rem .8rem;font-size:.75rem;
+                  font-weight:600;margin:.5rem 0}
+.conn-dot{width:6px;height:6px;background:#4ade80;
+          border-radius:50%;animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+</style>
+</head>
+<body>
+
+<!-- ─── رأس الصفحة ──────────────────────────────────────────────── -->
+<div class="header">
+  <img class="logo"
+       src="https://miaoda-conversation-file.s3cdn.medo.dev/user-dn6ofsr2tf5s/app-dnqz9anf7ny9/20260812/logo.png"
+       alt="الفولاذ"
+       onerror="this.style.display='none';document.getElementById('logoFallback').style.display='flex'">
+  <div class="logo-fallback" id="logoFallback" style="display:none">🏭</div>
+  <h1>رفع فاتورة</h1>
+  <p class="subtitle">شركة الفولاذ — منزل بورقيبة</p>
+  <div style="text-align:center;margin-top:.5rem">
+    <span class="connection-badge">
+      <span class="conn-dot"></span>
+      متصل بالكمبيوتر
+    </span>
+  </div>
+</div>
+
+<!-- ─── بطاقة الرفع ─────────────────────────────────────────────── -->
+<div class="card">
+  <div class="drop-area" id="dropArea">
+    <input type="file" id="fileInput"
+           accept="image/*,image/jpeg,image/png,image/webp"
+           capture="environment">
+    <div class="drop-icon">📷</div>
+    <div class="drop-text">
+      <strong>اضغط هنا للتقاط صورة</strong><br>
+      بكاميرا هاتفك أو اختر من المعرض
+    </div>
+  </div>
+
+  <!-- معاينة الصورة -->
+  <div class="preview" id="preview">
+    <img id="previewImg" src="" alt="معاينة الفاتورة">
+    <div class="file-info" id="fileInfo"></div>
+    <div class="img-actions">
+      <button onclick="retakePhoto()">📷 التقاط مجدداً</button>
+      <button onclick="rotateImage()">🔄 تدوير</button>
+    </div>
+  </div>
+
+  <!-- شريط التقدم -->
+  <div class="progress" id="progress">
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+    <div class="progress-label">
+      <span id="progressText">جاري الإرسال...</span>
+      <span id="progressPct">0%</span>
+    </div>
+  </div>
+
+  <!-- رسالة الحالة -->
+  <div class="status" id="statusMsg"></div>
+
+  <!-- زر الرفع -->
+  <button class="btn-upload" id="uploadBtn" disabled
+          onclick="uploadImage()">
+    📤 إرسال للكمبيوتر
+  </button>
+</div>
+
+<!-- ─── نصائح ───────────────────────────────────────────────────── -->
+<div class="card tips">
+  <h3>نصائح للحصول على نتائج OCR دقيقة</h3>
+  <div class="tip-item">
+    <span class="tip-icon">💡</span>
+    <span>التقط في ضوء كافٍ — تجنّب الظلال</span>
+  </div>
+  <div class="tip-item">
+    <span class="tip-icon">📐</span>
+    <span>اجعل الفاتورة مستقيمة وتشغل معظم الإطار</span>
+  </div>
+  <div class="tip-item">
+    <span class="tip-icon">🎯</span>
+    <span>تأكد أن النص واضح وليس ضبابياً</span>
+  </div>
+  <div class="tip-item">
+    <span class="tip-icon">📶</span>
+    <span>يجب أن يكون هاتفك على نفس شبكة WiFi</span>
+  </div>
+</div>
+
+<script>
+// ─── متغيرات عامة ───────────────────────────────────────────────
+const dropArea    = document.getElementById('dropArea');
+const fileInput   = document.getElementById('fileInput');
+const previewEl   = document.getElementById('preview');
+const previewImg  = document.getElementById('previewImg');
+const fileInfoEl  = document.getElementById('fileInfo');
+const progressEl  = document.getElementById('progress');
+const progressFill= document.getElementById('progressFill');
+const progressText= document.getElementById('progressText');
+const progressPct = document.getElementById('progressPct');
+const statusEl    = document.getElementById('statusMsg');
+const uploadBtn   = document.getElementById('uploadBtn');
+let   selectedFile= null;
+let   rotationDeg = 0;
+
+// ─── فتح الكاميرا عند النقر ─────────────────────────────────────
+dropArea.addEventListener('click', () => fileInput.click());
+dropArea.addEventListener('dragover',  e => {
+  e.preventDefault();
+  dropArea.classList.add('drag-over');
+});
+dropArea.addEventListener('dragleave', () =>
+  dropArea.classList.remove('drag-over'));
+dropArea.addEventListener('drop', e => {
+  e.preventDefault();
+  dropArea.classList.remove('drag-over');
+  if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
+});
+fileInput.addEventListener('change', () => {
+  if (fileInput.files.length) handleFile(fileInput.files[0]);
+});
+
+// ─── معالجة الملف المختار ───────────────────────────────────────
+function handleFile(file) {
+  if (!file.type.startsWith('image/')) {
+    showStatus('يرجى اختيار ملف صورة فقط', 'error');
+    return;
+  }
+  selectedFile  = file;
+  rotationDeg   = 0;
+  const reader  = new FileReader();
+  reader.onload = e => {
+    previewImg.src              = e.target.result;
+    previewImg.style.transform  = 'rotate(0deg)';
+    previewEl.style.display     = 'block';
+    dropArea.style.display      = 'none';
+    const kb = (file.size / 1024).toFixed(0);
+    fileInfoEl.textContent      = file.name + ' (' + kb + ' كيلوبايت)';
+    uploadBtn.disabled          = false;
+    statusEl.style.display      = 'none';
+  };
+  reader.readAsDataURL(file);
+}
+
+// ─── إعادة التقاط ───────────────────────────────────────────────
+function retakePhoto() {
+  selectedFile              = null;
+  rotationDeg               = 0;
+  fileInput.value           = '';
+  previewEl.style.display   = 'none';
+  dropArea.style.display    = 'block';
+  uploadBtn.disabled        = true;
+  statusEl.style.display    = 'none';
+  progressEl.style.display  = 'none';
+}
+
+// ─── تدوير الصورة ───────────────────────────────────────────────
+function rotateImage() {
+  rotationDeg = (rotationDeg + 90) % 360;
+  previewImg.style.transform = 'rotate(' + rotationDeg + 'deg)';
+}
+
+// ─── رفع الصورة ─────────────────────────────────────────────────
+function uploadImage() {
+  if (!selectedFile) return;
+
+  const formData = new FormData();
+  formData.append('file', selectedFile,
+                  selectedFile.name || 'invoice.jpg');
+
+  uploadBtn.disabled       = true;
+  progressEl.style.display = 'block';
+  statusEl.style.display   = 'none';
+  progressFill.style.width = '0%';
+
+  const xhr = new XMLHttpRequest();
+
+  // تتبع التقدم
+  xhr.upload.addEventListener('progress', e => {
+    if (e.lengthComputable) {
+      const pct = Math.round(e.loaded / e.total * 100);
+      progressFill.style.width  = pct + '%';
+      progressText.textContent  = 'جاري الإرسال...';
+      progressPct.textContent   = pct + '%';
+    }
+  });
+
+  // اكتمال الرفع
+  xhr.addEventListener('load', () => {
+    progressEl.style.display = 'none';
+    if (xhr.status === 200) {
+      showStatus('✅ تم الإرسال بنجاح! جاري المعالجة...', 'success');
+      setTimeout(retakePhoto, 3500);
+    } else {
+      showStatus('❌ فشل الإرسال (خطأ ' + xhr.status + '). حاول مجدداً.', 'error');
+      uploadBtn.disabled = false;
+    }
+  });
+
+  // خطأ في الاتصال
+  xhr.addEventListener('error', () => {
+    progressEl.style.display = 'none';
+    showStatus('⚠️ تعذّر الاتصال. تأكد من WiFi ثم أعد المحاولة.', 'error');
+    uploadBtn.disabled = false;
+  });
+
+  xhr.addEventListener('timeout', () => {
+    progressEl.style.display = 'none';
+    showStatus('⏱️ انتهت مهلة الاتصال. حاول مجدداً.', 'error');
+    uploadBtn.disabled = false;
+  });
+
+  xhr.timeout = 30000; // 30 ثانية
+  xhr.open('POST', '/upload');
+  xhr.send(formData);
+}
+
+// ─── عرض رسالة حالة ─────────────────────────────────────────────
+function showStatus(msg, type) {
+  statusEl.textContent   = msg;
+  statusEl.className     = 'status ' + type;
+  statusEl.style.display = 'block';
+}
+</script>
+</body>
+</html>
