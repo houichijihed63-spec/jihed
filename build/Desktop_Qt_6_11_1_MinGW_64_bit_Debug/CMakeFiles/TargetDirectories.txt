@@ -1,5 +1,0 @@
-C:/Users/Lenovo/Desktop/satge/build/Desktop_Qt_6_11_1_MinGW_64_bit_Debug/CMakeFiles/InvoiceExtractor.dir
-C:/Users/Lenovo/Desktop/satge/build/Desktop_Qt_6_11_1_MinGW_64_bit_Debug/CMakeFiles/edit_cache.dir
-C:/Users/Lenovo/Desktop/satge/build/Desktop_Qt_6_11_1_MinGW_64_bit_Debug/CMakeFiles/rebuild_cache.dir
-C:/Users/Lenovo/Desktop/satge/build/Desktop_Qt_6_11_1_MinGW_64_bit_Debug/CMakeFiles/InvoiceExtractor_autogen_timestamp_deps.dir
-C:/Users/Lenovo/Desktop/satge/build/Desktop_Qt_6_11_1_MinGW_64_bit_Debug/CMakeFiles/InvoiceExtractor_autogen.dir
