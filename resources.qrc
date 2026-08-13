@@ -5,4 +5,15 @@
         <file alias="logowatsapp.png">logowatsapp.png</file>
         <file alias="logogmail.png">logogmail.png</file>
     </qresource>
+    <!-- FIX: upload.html was missing from resources.qrc.
+         HttpServer::loadUploadPage() loads it via :/web/upload.html.
+         Without this entry Qt could not find the file and fell back to the
+         stripped inline HTML, losing all mobile-responsive CSS/JS. -->
+    <qresource prefix="/web">
+        <file alias="upload">resources/web/upload</file>
+    </qresource>
+    <!-- Logo image accessible by the upload page (served via Qt resource) -->
+    <qresource prefix="/images">
+        <file alias="logo.png">logo.png</file>
+    </qresource>
 </RCC>
